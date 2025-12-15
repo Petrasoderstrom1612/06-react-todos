@@ -36,7 +36,7 @@ const TodosPage = () => {
 
 			{/* Form should validate that a title is entered and at least 2 chars long, ONLY then should the parent's function for creating the todo be called */}
 			{/* <AddTodoForm onAdd={createTodo} /> 
-			do not forget e.preventDefault()
+			do not forget e.preventDefault() React.FormEvent
 			*/}
 
 			<p>Here be form</p>
