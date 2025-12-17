@@ -12,20 +12,16 @@ interface TodoListItemProps {
     // const TodoListItem = ({todo}: TodoListItemProps) => {
     // const TodoListItem = ({todo}: {todo: TodoListItemTodo}) => {
 
-    	const handleToggle = () => {
-		console.log("Would really want to toggle this todo:", todo);
-        onToggle(todo)
-	}
 
         return (
         <ListGroup className="todolist">
             
-                <ListGroup.Item className={todo.completed ? "todo done" : "todo"}>
+                <ListGroup.Item className={todo.completed ? "todo done" : "todo"}> {/* one curly */}
                     <span className="todo-title">
                         {todo.title}
                     </span>
                     <div className="todo-actions">
-                        <Button onClick={handleToggle} variant="secondary">Toggle</Button>
+                        <Button onClick={() => onToggle(todo)} variant="secondary">Toggle</Button>
                         <Button variant="warning">Edit</Button>
                         <Button variant="danger">Delete</Button>
 

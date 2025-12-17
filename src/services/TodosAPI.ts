@@ -41,6 +41,7 @@ export const post = async <Response, Payload>(endpoint: string, data: Payload) =
  * Get todos from API using axios 🤘🏻
  */
 export const getTodos = async () => {
+	console.log(Response, "http://localhost:3000/todos")
 	return get<Todo[]>("/todos");  // "http://localhost:3000/todos"
 }
 
