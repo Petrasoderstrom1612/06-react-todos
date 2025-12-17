@@ -5,10 +5,12 @@ import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import TodosPage from "./pages/TodosPage";
 import "./assets/scss/App.scss";
+import useTheme from "./hooks/useTheme";
 
 function App() {
+	const {isDarkMode} = useTheme()
 	return (
-		<div id="App">
+		<div id="App" className={isDarkMode ? "bg-dark text-white" : ""}>
 			<Navigation />
 
 			<Container className="py-3">
