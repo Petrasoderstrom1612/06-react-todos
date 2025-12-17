@@ -30,12 +30,13 @@ const TodosPage = () => {
 		prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, completed: !prevTodo.completed } : prevTodo): prev);
 	}
 
-	const deleteTodo = async (todo: Todo) => {
-		await TodosAPI.deleteTodo(todo.id)
+	const deleteTodo = async (todoId: number) => {
+		await TodosAPI.deleteTodo(todoId)
 
-		setTodos(prev => prev? prev.filter(prevTodo => prevTodo.id !== todo.id): prev)
+		setTodos(prev => prev? prev.filter(prevTodo => prevTodo.id !== todoId): prev)
 	}
 
+	// const editTodo = async (todoId: number, newTitle: string) => {
 	const editTodo = async (todo: Todo) => {
 		const title = prompt("Todo text", todo.title)
 		if (!title) return

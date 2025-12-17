@@ -22,7 +22,6 @@ const AddTodoForm: React.FC<TodoOnly> = () => {
         </div>
 
         <button type="submit" className="btn btn-success">
-            //  ^?
           Create
         </button>
         <Button type="reset" className="btn btn-warning">

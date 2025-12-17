@@ -11,7 +11,7 @@ export interface Todo {
 export interface TodoListItemProps {
     todo: Todo
     onToggle: (todo: Todo) => Promise<void> //copied after hovring over the void fnc
-    deleteTodo: (todo: Todo) => Promise<void>
+    deleteTodo: (todoId: number) => Promise<void>
     editTodo: (todo: Todo) => Promise<void>
 }
 

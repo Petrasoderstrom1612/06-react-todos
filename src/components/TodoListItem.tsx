@@ -8,7 +8,13 @@ import type { TodoListItemProps } from "../services/TodosAPI.types";
     //    ^?  
     // const TodoListItem = ({todo}: TodoListItemProps) => {
     // const TodoListItem = ({todo}: {todo: TodoListItemTodo}) => {
+        const handleDelete = () => {
+            if (!confirm("you sure?")){
+                return
+            }
 
+            deleteTodo(todo.id)
+        }
 
         return (
         <ListGroup className="todolist">
@@ -20,7 +26,7 @@ import type { TodoListItemProps } from "../services/TodosAPI.types";
                     <div className="todo-actions">
                         <Button onClick={() => onToggle(todo)} variant="secondary">Toggle</Button>
                         <Button onClick={()=> editTodo(todo)} variant="warning">Edit</Button>
-                        <Button onClick={()=> deleteTodo(todo)} variant="danger">Delete</Button>
+                        <Button onClick={handleDelete} variant="danger">Delete</Button>
 
                     </div>
                 </ListGroup.Item>
