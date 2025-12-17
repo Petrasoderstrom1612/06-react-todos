@@ -24,13 +24,22 @@ const TodosPage = () => {
 		await TodosAPI.updateTodo(todo.id, { completed: !todo.completed });
 
 		setTodos(prev =>
-		prev ? prev.map(t => t.id === todo.id ? { ...t, completed: !t.completed } : t): prev);
+		prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, completed: !prevTodo.completed } : prevTodo): prev);
 	}
 
 	const deleteTodo = async (todo: Todo) => {
 		await TodosAPI.deleteTodo(todo.id)
 
 		setTodos(prev => prev? prev.filter(prevTodo => prevTodo.id !== todo.id): prev)
+	}
+
+	const editTodo = async (todo: Todo) => {
+		const title = prompt("Todo text", todo.title)
+		if (!title) return
+		await TodosAPI.updateTodo(todo.id, {title:title})
+
+		setTodos(prev =>
+		prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, title:title } : prevTodo): prev);
 	}
 
 	return (
@@ -56,6 +65,7 @@ const TodosPage = () => {
 							todo={todo}
 							onToggle={toggleTodo}
 							deleteTodo={deleteTodo}
+							editTodo={editTodo}
 						/>
 					))}
 				</ListGroup>

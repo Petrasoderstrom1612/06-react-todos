@@ -6,9 +6,10 @@ interface TodoListItemProps {
     todo: Todo
     onToggle: (todo: Todo) => Promise<void> //copied after hovring over the void fnc
     deleteTodo: (todo: Todo) => Promise<void>
+    editTodo: (todo: Todo) => Promise<void>
 }  
     
-    const TodoListItem: React.FC<TodoListItemProps> = ({todo,onToggle, deleteTodo, }) => { //FC = FunctionComponent
+    const TodoListItem: React.FC<TodoListItemProps> = ({todo, onToggle, deleteTodo, editTodo}) => { //FC = FunctionComponent
     //    ^?  
     // const TodoListItem = ({todo}: TodoListItemProps) => {
     // const TodoListItem = ({todo}: {todo: TodoListItemTodo}) => {
@@ -23,7 +24,7 @@ interface TodoListItemProps {
                     </span>
                     <div className="todo-actions">
                         <Button onClick={() => onToggle(todo)} variant="secondary">Toggle</Button>
-                        <Button variant="warning">Edit</Button>
+                        <Button onClick={()=> editTodo(todo)} variant="warning">Edit</Button>
                         <Button onClick={()=> deleteTodo(todo)} variant="danger">Delete</Button>
 
                     </div>
