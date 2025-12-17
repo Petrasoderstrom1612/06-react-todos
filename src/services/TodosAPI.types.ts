@@ -8,5 +8,16 @@ export interface Todo {
 	completed: boolean;
 }
 
+export interface TodoListItemProps {
+    todo: Todo
+    onToggle: (todo: Todo) => Promise<void> //copied after hovring over the void fnc
+    deleteTodo: (todo: Todo) => Promise<void>
+    editTodo: (todo: Todo) => Promise<void>
+}
+
+export interface TodoOnly {
+  todo: Todo;
+}
+
 export type CreateTodoPayload = Omit<Todo, "id">;
 export type UpdateTodoPayload = Partial<CreateTodoPayload>;
