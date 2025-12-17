@@ -5,13 +5,13 @@ import SuccessAlert from "../components/alerts/SuccessAlert"
 import AddTodoForm from "../components/AddTodoForm";
 import TodoListItem from "../components/TodoListItem";
 import * as TodosAPI from "../services/TodosAPI"; //import everything from TodosAPI
-import type { Todo } from "../services/TodosAPI.types";
+import type { Todo, CreateTodoPayload } from "../services/TodosAPI.types";
 
 
 const TodosPage = () => {
-	const newTodo = {} as Todo;
 	const [isLoading, setIsLoading] = useState(true);
 	const [todos, setTodos] = useState<Todo[] | null>(null);
+
 
 	useEffect(() =>{
 		(async () => {
@@ -46,12 +46,29 @@ const TodosPage = () => {
 		prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, title:title } : prevTodo): prev);
 	}
 
+		const getTodos = async () => {
+		// reset initial state
+		setIsLoading(true);
+
+		const data = await TodosAPI.getTodos();
+		setIsLoading(false);
+		setTodos(data);
+	}
+
+	const createTodo = async (newTodo: CreateTodoPayload) => {
+		setIsLoading(true);
+		await TodosAPI.createTodo(newTodo);
+
+		// Re-fetch all todos
+		getTodos();
+	}
+
 	return (
 		<>
 		<SuccessAlert>! success</SuccessAlert>
 
 			<h1 className="mb-3">Todos</h1>
-			<AddTodoForm todo={newTodo} />
+			<AddTodoForm onAdd={createTodo} />
 
 			{/* Form should validate that a title is entered and at least 2 chars long, ONLY then should the parent's function for creating the todo be called */}
 			{/* <AddTodoForm onAdd={createTodo} /> 
