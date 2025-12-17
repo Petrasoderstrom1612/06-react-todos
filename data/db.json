@@ -1,24 +1,9 @@
 {
   "todos": [
     {
-      "title": "Learn TypeScript in React",
-      "completed": false,
-      "id": 1
-    },
-    {
       "title": "Learn Advanced TypeScript in React",
       "completed": false,
       "id": 2
-    },
-    {
-      "title": "Learn stuff",
-      "completed": false,
-      "id": 3
-    },
-    {
-      "title": "Do all the todos",
-      "completed": false,
-      "id": 4
     }
   ]
 }

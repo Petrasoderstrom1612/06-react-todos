@@ -27,6 +27,12 @@ const TodosPage = () => {
 		prev ? prev.map(t => t.id === todo.id ? { ...t, completed: !t.completed } : t): prev);
 	}
 
+	const deleteTodo = async (todo: Todo) => {
+		await TodosAPI.deleteTodo(todo.id)
+
+		setTodos(prev => prev? prev.filter(prevTodo => prevTodo.id !== todo.id): prev)
+	}
+
 	return (
 		<>
 		<SuccessAlert>! success</SuccessAlert>
@@ -47,8 +53,9 @@ const TodosPage = () => {
 					{todos.map(todo => ( 
 						<TodoListItem 
 							key={todo.id}
-							onToggle={toggleTodo}
 							todo={todo}
+							onToggle={toggleTodo}
+							deleteTodo={deleteTodo}
 						/>
 					))}
 				</ListGroup>
