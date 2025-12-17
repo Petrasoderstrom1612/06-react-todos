@@ -6,34 +6,40 @@ import AddTodoForm from "../components/AddTodoForm";
 import TodoListItem from "../components/TodoListItem";
 import * as TodosAPI from "../services/TodosAPI"; //import everything from TodosAPI
 import type { Todo, CreateTodoPayload } from "../services/TodosAPI.types";
+import { useQuery } from "@tanstack/react-query";
 
 
 const TodosPage = () => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [todos, setTodos] = useState<Todo[] | null>(null);
+	// const [isLoading, setIsLoading] = useState(true);
+	// const [todos, setTodos] = useState<Todo[] | null>(null);
+
+	const {data: todos, isLoading, refetch} = useQuery({
+		queryKey: ["todos"],
+		queryFn: TodosAPI.getTodos
+	})
 
 
-	useEffect(() =>{
-		(async () => {
-			setIsLoading(true);
-			const data = await TodosAPI.getTodos(); //from TodosAPI.ts
-			setTodos(data);
-			setIsLoading(false);
-		})();
-	},[])
+	// useEffect(() =>{
+	// 	(async () => {
+	// 		setIsLoading(true);
+	// 		const data = await TodosAPI.getTodos(); //from TodosAPI.ts
+	// 		setTodos(data);
+	// 		//setIsLoading(false);
+	// 	})();
+	// },[])
 	
 
 	const toggleTodo = async (todo: Todo) => {
 		await TodosAPI.updateTodo(todo.id, { completed: !todo.completed });
 
-		setTodos(prev =>
-		prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, completed: !prevTodo.completed } : prevTodo): prev);
+		//setTodos(prev =>
+		//prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, completed: !prevTodo.completed } : prevTodo): prev);
 	}
 
 	const deleteTodo = async (todoId: number) => {
 		await TodosAPI.deleteTodo(todoId)
 
-		setTodos(prev => prev? prev.filter(prevTodo => prevTodo.id !== todoId): prev)
+		//setTodos(prev => prev? prev.filter(prevTodo => prevTodo.id !== todoId): prev)
 	}
 
 	// const editTodo = async (todoId: number, newTitle: string) => {
@@ -42,25 +48,26 @@ const TodosPage = () => {
 		if (!title) return
 		await TodosAPI.updateTodo(todo.id, {title:title})
 
-		setTodos(prev =>
-		prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, title:title } : prevTodo): prev);
+		//setTodos(prev =>
+		//prev ? prev.map(prevTodo => prevTodo.id === todo.id ? { ...prevTodo, title:title } : prevTodo): prev);
 	}
 
-		const getTodos = async () => {
+		//const getTodos = async () => {
 		// reset initial state
-		setIsLoading(true);
+		// setIsLoading(true);
 
-		const data = await TodosAPI.getTodos();
-		setIsLoading(false);
-		setTodos(data);
-	}
+		//const data = await TodosAPI.getTodos();
+		//setIsLoading(false);
+		//setTodos(data);
+		//}
 
 	const createTodo = async (newTodo: CreateTodoPayload) => {
-		setIsLoading(true);
+		//setIsLoading(true);
 		await TodosAPI.createTodo(newTodo);
 
 		// Re-fetch all todos
-		getTodos();
+		//getTodos();
+		refetch()
 	}
 
 	return (

@@ -1,11 +1,6 @@
 {
   "todos": [
     {
-      "title": "dddd",
-      "completed": false,
-      "id": 2
-    },
-    {
       "title": "tree",
       "completed": false,
       "id": 3

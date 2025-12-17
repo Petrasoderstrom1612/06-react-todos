@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import TodosPage from "./pages/TodosPage";
 import "./assets/scss/App.scss";
 import useTheme from "./hooks/useTheme";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools"
 
 function App() {
 	const {isDarkMode} = useTheme()
@@ -25,6 +26,7 @@ function App() {
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Container>
+			<ReactQueryDevtools />
 		</div>
 	)
 }
